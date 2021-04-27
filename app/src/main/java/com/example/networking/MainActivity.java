@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
             //noinspection CharsetObjectCanBeUsed
             return new Scanner(getApplicationContext().getAssets().open(fileName), Charset.forName("UTF-8").name()).useDelimiter("\\A").next();
         } catch (IOException e) {
-            Log.e("==>", "Could not read file: " + fileName);
+            Log.e("", "Could not read file: " + fileName);
             return null;
         }
     }
@@ -37,5 +37,9 @@ public class MainActivity extends AppCompatActivity {
         myWebView.setWebViewClient(new WebViewClient());
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+
+
+        String s = readFile("mountains.json");
+        Log.d("==>","The following text was found in textfile:\n\n"+s);
     }
 }
