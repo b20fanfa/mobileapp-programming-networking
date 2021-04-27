@@ -8,6 +8,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Scanner;
@@ -15,6 +17,7 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
 
     private WebView myWebView;
+    private Mountain[] mountains;
 
     @SuppressWarnings("SameParameterValue")
     private String readFile(String fileName) {
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             //noinspection CharsetObjectCanBeUsed
             return new Scanner(getApplicationContext().getAssets().open(fileName), Charset.forName("UTF-8").name()).useDelimiter("\\A").next();
         } catch (IOException e) {
-            Log.e("", "Could not read file: " + fileName);
+            Log.e("==>", "Could not read file: " + fileName);
             return null;
         }
     }
@@ -41,5 +44,12 @@ public class MainActivity extends AppCompatActivity {
 
         String s = readFile("mountains.json");
         Log.d("==>","The following text was found in textfile:\n\n"+s);
+
+        Gson gson=new Gson();
+        mountains=gson.fromJson(s,Mountain[].class);
+
+        for (int i=0; i < mountains.length; i++) {
+            Log.d("==>","Hittade ett berg:"+i);
+        }
     }
 }
