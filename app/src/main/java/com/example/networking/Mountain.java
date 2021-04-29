@@ -1,20 +1,6 @@
 package com.example.networking;
 
-/*
-[{
-  "ID": "mobilprog_k2",
-  "name": "K2",
-  "type": "brom",
-  "company": "",
-  "location": "The Karakoram range",
-  "category": "",
-  "size": 8611,
-  "cost": 28251,
-  "auxdata": {
-    "wiki": "https://en.wikipedia.org/wiki/K2",
-    "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/K2_2006b.jpg/640px-K2_2006b.jpg"
-  }
- */
+
 public class Mountain {
     private String ID;
     private String name;
@@ -31,8 +17,12 @@ public class Mountain {
         return name;
     }
 
-    public Auxdata getAuxdata() {
-        return auxdata;
+    public String getLocation() {
+        return location;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     @Override
@@ -41,3 +31,4 @@ public class Mountain {
     }
 
 }
+
