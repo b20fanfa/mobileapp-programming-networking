@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.internal.bind.ArrayTypeAdapter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -66,13 +67,6 @@ public class MainActivity extends AppCompatActivity {
 
         new JsonTask().execute("https://wwwlab.iit.his.se/brom/kurser/mobilprog/dbservice/admin/getdataasjson.php?type=brom");
 
-        /*myWebView = findViewById(R.id.my_webview);
-        myWebView.setWebViewClient(new WebViewClient());
-        WebSettings webSettings = myWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-
-
-            */
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -130,13 +124,8 @@ public class MainActivity extends AppCompatActivity {
             }
             adapter.notifyDataSetChanged();
 
+        }
 
     }
-
-
-    }
-
-
-
 
 }
