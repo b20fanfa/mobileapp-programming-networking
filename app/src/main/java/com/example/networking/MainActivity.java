@@ -49,6 +49,20 @@ public class MainActivity extends AppCompatActivity {
         arrayMountain=new ArrayList<>();
         adapter=new ArrayAdapter<>(MainActivity.this,R.layout.list_item_textview,R.id.list_item_textview,arrayMountain);
 
+        myListView.setAdapter(adapter);
+        /*adapter.notifyDataSetChanged(); */
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Mountain a = arrayMountain.get(position);
+                a.getName();
+                a.getSize();
+                a.getLocation();
+                String medelande = a.getName() + a.getLocation() + a.getSize();
+                Toast.makeText(MainActivity.this, medelande ,  Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
         new JsonTask().execute("https://wwwlab.iit.his.se/brom/kurser/mobilprog/dbservice/admin/getdataasjson.php?type=brom");
 
