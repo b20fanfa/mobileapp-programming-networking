@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private WebView myWebView;
     private Mountain[] mountains;
 
-
-
+    private ArrayList<Mountain>  arrayMountain = new ArrayList<>();
+    private ArrayAdapter<Mountain> adapter;
 
 
 
@@ -44,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ListView myListView=findViewById(R.id.listView);
+
+        arrayMountain=new ArrayList<>();
+        adapter=new ArrayAdapter<>(MainActivity.this,R.layout.list_item_textview,R.id.list_item_textview,arrayMountain);
 
 
         new JsonTask().execute("https://wwwlab.iit.his.se/brom/kurser/mobilprog/dbservice/admin/getdataasjson.php?type=brom");
@@ -101,8 +105,19 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String json) {
             Log.d("==>", json);
 
+            Gson gson=new Gson();
+            Mountain[] mountains;
+            mountains=gson.fromJson(json,Mountain[].class);
 
-        }
+
+            arrayMountain.clear();
+            for(int i=0; i <mountains.length; i++){
+                arrayMountain.add(mountains[i]);
+            }
+            adapter.notifyDataSetChanged();
+
+
+    }
 
 
     }
