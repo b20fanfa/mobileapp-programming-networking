@@ -6,9 +6,14 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -20,6 +25,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,16 +34,10 @@ public class MainActivity extends AppCompatActivity {
     private WebView myWebView;
     private Mountain[] mountains;
 
-    @SuppressWarnings("SameParameterValue")
-    private String readFile(String fileName) {
-        try {
-            //noinspection CharsetObjectCanBeUsed
-            return new Scanner(getApplicationContext().getAssets().open(fileName), Charset.forName("UTF-8").name()).useDelimiter("\\A").next();
-        } catch (IOException e) {
-            Log.e("==>", "Could not read file: " + fileName);
-            return null;
-        }
-    }
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +45,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        myWebView = findViewById(R.id.my_webview);
+
+        new JsonTask().execute("https://wwwlab.iit.his.se/brom/kurser/mobilprog/dbservice/admin/getdataasjson.php?type=brom");
+
+        /*myWebView = findViewById(R.id.my_webview);
         myWebView.setWebViewClient(new WebViewClient());
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
 
-        String s = readFile("mountains.json");
-        Log.d("==>","The following text was found in textfile:\n\n"+s);
-
-        Gson gson=new Gson();
-        mountains=gson.fromJson(s,Mountain[].class);
-        for(int i=0; i <mountains.length; i++){
-            Log.d("MainActivity ==>","Hittade ett berg:"+ mountains[i].getName() + " " + mountains[i].getAuxdata().getWiki());
-        }
-
+            */
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -103,7 +99,15 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String json) {
-            Log.d("TAG", json);
+            Log.d("==>", json);
+
+
         }
+
+
     }
+
+
+
+
 }
